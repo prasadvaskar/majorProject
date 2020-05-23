@@ -1,0 +1,77 @@
+<html>
+
+<head>
+    <title>Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+    <div class="hero">
+        <div id="formbox" class="form-box">
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="login()">Login</button>
+                <button type="button" class="toggle-btn" id="signup" onclick="register()">Sign Up</button>
+            </div>
+
+            <form id="login" class="input-group" action="login.php" method="POST">
+                <input type="text" class="input-field" name="user" placeholder="Username" required>
+                <input type="password" class="input-field" name="pass" placeholder="Password" required>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+            <form id="register" class="input-group" method="POST" >
+                <input type="text" class="input-field" name="name" placeholder="Username" required>
+                <input type="email" class="input-field" name="email" placeholder="Email" required>
+                <input type="text" class="input-field" name="password" placeholder="Enter Password" required>
+                <input type="checkbox" class="check-box"><span>I agree to terms and conditions.</span>
+                <button type="submit" id="btnregister" name ="btnregister"class="submit-btn">Register</button>
+            </form>
+
+        </div>
+    </div>
+    <script>
+        var x = document.getElementById("login");
+        var y = document.getElementById("register");
+        var z = document.getElementById("btn");
+
+        function register() {
+            x.style.left = "-1100px";
+            y.style.left = "50px"
+            z.style.left = "110px"
+
+            $("#register").show();
+        }
+        function login() {
+            x.style.left = "50px";
+            y.style.left = "400px"
+            z.style.left = "0px"
+            $("#register").hide(300);
+
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnregister").click(function () {
+                var vname = $("#name").val();
+                var vemail = $("#email").val();
+                var vpass = $("#password").val();
+                    $.post("signup.php", //Required URL of the page on server
+                        { // Data Sending With Request To Server
+                            name: vname,
+                            email: vemail,
+                            password: vpass
+                        },
+                        function (response, status) { // Required Callback Function
+                            alert("*----Received Data----*nnResponse : " + response + "nnStatus : " + status);//"response" receives - whatever written in echo of above PHP script.
+                        
+                        });
+                
+            });
+        });
+    </script>
+</body>
+
+</html>
